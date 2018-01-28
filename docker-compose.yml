@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  application:
+    image: "tutum/hello-world"
+    ports:
+     - 8000:80
+  abc_proxy:
+    build: "proxy"
+    env_file:
+      - proxy/.env 
+    ports:
+     - 5000:5000
+  nginx:
+    build: nginx/ 
+    ports:
+     - 80:80
+    depends_on:
+     - application
+     - abc_proxy 
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=80
