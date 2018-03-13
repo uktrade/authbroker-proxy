@@ -6,5 +6,7 @@ COPY default.conf /etc/nginx/conf.d/
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
+EXPOSE 443
+
 CMD /entrypoint.sh
 
