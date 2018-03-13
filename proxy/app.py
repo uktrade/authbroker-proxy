@@ -1,5 +1,4 @@
 import os
-import datetime as dt
 import logging
 from urllib.parse import urljoin
 
@@ -15,6 +14,7 @@ ABC_BASE_URL = os.getenv('ABC_BASE_URL')
 ABC_TOKEN_URL = urljoin(ABC_BASE_URL, '/o/token/')
 ABC_AUTHORIZE_URL = urljoin(ABC_BASE_URL, '/o/authorize/')
 ABC_INTROSPECT_URL = urljoin(ABC_BASE_URL, '/o/introspect/')
+ABC_REDIRECT_HOST = os.getenv('ABC_REDIRECT_HOST', 'http://localhost')
 
 PORT = int(os.getenv('PORT', 5000))
 
@@ -40,7 +40,8 @@ abc = oauth.remote_app(
 
 @app.route('/auth/login')
 def login():
-    return abc.authorize(callback=url_for('authorized', _external=True))
+    redirect_url = urljoin(ABC_REDIRECT_HOST, url_for('authorized'))
+    return abc.authorize(callback=redirect_url)
 
 
 @app.route('/auth/check')
@@ -56,7 +57,7 @@ def check():
     if 'abc_token' in session:
 
         # Better to have a lightweight auth check endpoint on the ABC, rather than hitting 
-	# the profile url
+        # the profile url
         me = abc.get('/api/v1/user/me/')
         if me.status == 200:
             return '', 202
@@ -67,6 +68,7 @@ def check():
 @app.route('/auth/response')
 def authorized():
     resp = abc.authorized_response()
+
     if resp is None or resp.get('access_token') is None:
         abort(401)
 
@@ -74,7 +76,7 @@ def authorized():
 
     next_url = request.args.get('next', '/')
 
-    return redirect(next_url) 
+    return redirect(next_url)
 
 
 @abc.tokengetter
