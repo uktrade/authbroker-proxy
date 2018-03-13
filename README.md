@@ -1,7 +1,7 @@
 
 # ABC proxy (initial POC) 
 
-### NOTES
+### Notes 
 
 The proxy requires nginx compiled with support for the auth_request directive. This is available in the official nginx docker image.
 

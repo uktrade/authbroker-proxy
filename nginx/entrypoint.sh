@@ -15,6 +15,13 @@ openssl req -x509 -newkey rsa:4086 \
 -out "/cert.pem" \
 -days 3650 -nodes -sha256
 
-envsubst '\$APP_PROXY_TARGET \$APP_PROXY_PORT \$ABC_PROXY_TARGET \$ABC_PROXY_PORT' < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf
+echo ">> generating config"
+
+envsubst '\$APP_PROXY_TARGET \$APP_PROXY_PORT \$ABC_PROXY_TARGET \$ABC_PROXY_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+
+cat /etc/nginx/conf.d/default.conf
+
+
+echo ">> running nginx"
 
 /usr/sbin/nginx -g "daemon off;"
