@@ -13,12 +13,12 @@ For every request made to the application, nginx first hits the auth_request url
 
 You can run a local environment using docker-compose
 
-`cd proxy; cp .env.template .env`
+`cd proxy; cp env.template .env`
 
 Put the OAuth2 client id, secret and url into the .env file.
 
 Run `docker-compose up`
 
-navigate to `http://{your-docker-ip}/` which should present you with the auth broker login screen
+navigate to `https://localhost` which should present you with the auth broker login screen
 
-Ensure that the correct redirect uri is whitelisted for your OAuth2 application, e.g `http://{your-docker-ip}/auth/response`
+Ensure that the correct redirect uri is whitelisted for your OAuth2 application, e.g `https://localhost/auth/response`

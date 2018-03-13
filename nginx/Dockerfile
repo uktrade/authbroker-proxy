@@ -1,4 +1,10 @@
 FROM nginx:latest
 
-COPY default.conf /etc/nginx/conf.d
+RUN apt-get update && apt-get install openssl
+
+COPY default.conf /etc/nginx/conf.d/
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
+CMD /entrypoint.sh
 
