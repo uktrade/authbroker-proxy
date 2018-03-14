@@ -22,3 +22,4 @@ Run `docker-compose up`
 navigate to `https://localhost` which should present you with the auth broker login screen
 
 Ensure that the correct redirect uri is whitelisted for your OAuth2 application, e.g `https://localhost/auth/response`
+
