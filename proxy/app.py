@@ -2,7 +2,7 @@ import os
 import logging
 from urllib.parse import urljoin
 
-from flask import Flask, redirect, url_for, session, request, jsonify, abort
+from flask import Flask, redirect, url_for, session, request, jsonify, abort, make_response
 from flask_oauthlib.client import OAuth
 
 from raven.contrib.flask import Sentry
@@ -61,7 +61,9 @@ def check():
         # the profile url
         me = abc.get('/api/v1/user/me/')
         if me.status == 200:
-            return '', 202
+            response = make_response('OK', 202)
+            response.headers['Authbroker'] = me.data['email']
+            return response
 
     abort(401)
 
