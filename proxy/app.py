@@ -14,7 +14,8 @@ ABC_BASE_URL = os.getenv('ABC_BASE_URL')
 ABC_TOKEN_URL = urljoin(ABC_BASE_URL, '/o/token/')
 ABC_AUTHORIZE_URL = urljoin(ABC_BASE_URL, '/o/authorize/')
 ABC_INTROSPECT_URL = urljoin(ABC_BASE_URL, '/o/introspect/')
-ABC_REDIRECT_HOST = os.getenv('ABC_REDIRECT_HOST', 'http://localhost')
+
+ABC_REDIRECT_HOST = os.getenv('ABC_REDIRECT_HOST', 'http://localhost')  # rename to PUBLIC_DOMAIN
 
 PORT = int(os.getenv('PORT', 5000))
 
@@ -74,9 +75,7 @@ def authorized():
 
     session['abc_token'] = (resp['access_token'], '')
 
-    next_url = request.args.get('next', '/')
-
-    return redirect(next_url)
+    return redirect(ABC_REDIRECT_HOST)
 
 
 @abc.tokengetter

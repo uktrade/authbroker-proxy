@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install openssl
 # but has suddenly become unavailable in the base image.
 RUN apt-get install gettext-base
 
-COPY default.conf /etc/nginx/conf.d/
+COPY default.conf /etc/nginx/conf.d/default.conf.template
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 

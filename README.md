@@ -1,7 +1,7 @@
 
 # ABC proxy (initial POC) 
 
-### NOTES
+### Notes 
 
 The proxy requires nginx compiled with support for the auth_request directive. This is available in the official nginx docker image.
 
@@ -22,3 +22,4 @@ Run `docker-compose up`
 navigate to `https://localhost` which should present you with the auth broker login screen
 
 Ensure that the correct redirect uri is whitelisted for your OAuth2 application, e.g `https://localhost/auth/response`
+
