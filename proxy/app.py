@@ -62,7 +62,7 @@ def check():
         me = abc.get('/api/v1/user/me/')
         if me.status == 200:
             response = make_response('OK', 202)
-            response.headers['Authbroker'] = me.data['email']
+            response.headers['Authbroker-user-id'] = me.data['email']
             return response
 
     abort(401)
