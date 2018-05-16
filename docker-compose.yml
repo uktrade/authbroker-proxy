@@ -17,6 +17,7 @@ services:
     build: nginx/ 
     ports:
      - 443:443
+     - 8080:80
     depends_on:
      - application
      - abc_proxy 
