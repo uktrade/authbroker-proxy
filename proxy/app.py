@@ -1,5 +1,4 @@
 import os
-import logging
 from urllib.parse import urljoin
 
 from flask import Flask, redirect, url_for, session, request, jsonify, abort, make_response
@@ -15,11 +14,10 @@ ABC_TOKEN_URL = urljoin(ABC_BASE_URL, '/o/token/')
 ABC_AUTHORIZE_URL = urljoin(ABC_BASE_URL, '/o/authorize/')
 ABC_INTROSPECT_URL = urljoin(ABC_BASE_URL, '/o/introspect/')
 
-ABC_REDIRECT_HOST = os.getenv('ABC_REDIRECT_HOST', 'http://localhost')  # rename to PUBLIC_DOMAIN
+ABC_REDIRECT_HOST = os.getenv('ABC_REDIRECT_HOST', 'http://localhost')
 
 PORT = int(os.getenv('PORT', 5000))
 
-logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
@@ -73,7 +71,10 @@ def authorized():
     resp = abc.authorized_response()
 
     if resp is None or resp.get('access_token') is None:
+        app.logger.info('Failed login: {}'.format(request.remote_addr))
         abort(401)
+
+    app.logger.info('Authenticated: {} {}'.format(resp['email'], request.remote_addr))
 
     session['abc_token'] = (resp['access_token'], '')
 
