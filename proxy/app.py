@@ -74,9 +74,10 @@ def authorized():
         app.logger.info('Failed login: {}'.format(request.remote_addr))
         abort(401)
 
-    app.logger.info('Authenticated: {} {}'.format(resp['email'], request.remote_addr))
-
     session['abc_token'] = (resp['access_token'], '')
+
+    me = abc.get('/api/v1/user/me/')
+    app.logger.info('Authenticated: {} {}'.format(me.data['email'], request.remote_addr))
 
     return redirect(ABC_REDIRECT_HOST)
 
