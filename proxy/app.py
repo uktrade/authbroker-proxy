@@ -1,4 +1,6 @@
 import os
+import sys
+import logging
 from urllib.parse import urljoin
 
 from flask import Flask, redirect, url_for, session, request, jsonify, abort, make_response
@@ -18,7 +20,17 @@ ABC_REDIRECT_HOST = os.getenv('ABC_REDIRECT_HOST', 'http://localhost')
 
 PORT = int(os.getenv('PORT', 5000))
 
+# set up logging
+logger = logging.getLogger('abc_proxy')
+logger.setLevel(logging.DEBUG)
 
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
+# set up app
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 app.debug = os.getenv('DEBUG') == 'True'
@@ -70,14 +82,19 @@ def check():
 def authorized():
     resp = abc.authorized_response()
 
+    if request.headers.getlist("X-Forwarded-For"):
+        public_ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        public_ip = request.remote_addr
+
     if resp is None or resp.get('access_token') is None:
-        app.logger.info('Failed login: {}'.format(request.remote_addr))
+        logger.info('Failed login: {}'.format(public_ip))
         abort(401)
 
     session['abc_token'] = (resp['access_token'], '')
 
     me = abc.get('/api/v1/user/me/')
-    app.logger.info('Authenticated: {} {}'.format(me.data['email'], request.remote_addr))
+    logger.info('Authenticated: {} {}'.format(me.data['email'], public_ip))
 
     return redirect(ABC_REDIRECT_HOST)
 
@@ -89,4 +106,5 @@ def get_abc_oauth_token():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=PORT)
+
 
