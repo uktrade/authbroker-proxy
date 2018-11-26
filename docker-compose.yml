@@ -27,3 +27,4 @@ services:
      - ABC_PROXY_TARGET=abc_proxy
      - ABC_PROXY_PORT=5000
      - APP_PROXY_PROTOCOL=http
+     - DNS_RESOLVER=127.0.0.11
