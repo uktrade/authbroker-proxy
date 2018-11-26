@@ -1,5 +1,6 @@
 flask
 flask_oauthlib
+requests==2.20.1
 python-dotenv
 
 raven
