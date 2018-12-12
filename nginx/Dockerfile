@@ -1,6 +1,11 @@
 FROM nginx:latest
 
-RUN apt-get update && apt-get install openssl
+RUN apt-get update && \
+    apt-get update -y && \
+    apt-get upgrade -y --no-install-recommends && \
+    apt-get install openssl && \
+    rm -rf /var/lib/apt/lists/*
+
 
 # Required for envsubst, however, this is already in the upstream Dockerfile
 # but has suddenly become unavailable in the base image.
