@@ -5,20 +5,48 @@
 #    pip-compile
 #
 blinker==1.4
-certifi==2018.1.18        # via requests
-chardet==3.0.4            # via requests
-click==6.7                # via flask, python-dotenv
+    # via -r requirements.in
+certifi==2018.1.18
+    # via requests
+chardet==3.0.4
+    # via requests
+click==6.7
+    # via
+    #   flask
+    #   python-dotenv
+contextlib2==0.6.0.post1
+    # via raven
 flask-oauthlib==0.9.4
+    # via -r requirements.in
 flask==1.1.1
+    # via
+    #   -r requirements.in
+    #   flask-oauthlib
 gunicorn==19.7.1
-idna==2.6                 # via requests
-itsdangerous==0.24        # via flask
-jinja2==2.10.1            # via flask
-markupsafe==1.0           # via jinja2
-oauthlib==2.0.6           # via flask-oauthlib, requests-oauthlib
+    # via -r requirements.in
+idna==2.6
+    # via requests
+itsdangerous==0.24
+    # via flask
+jinja2==2.11.3
+    # via flask
+markupsafe==1.0
+    # via jinja2
+oauthlib==2.0.6
+    # via
+    #   flask-oauthlib
+    #   requests-oauthlib
 python-dotenv==0.7.1
+    # via -r requirements.in
 raven==6.5.0
-requests-oauthlib==0.8.0  # via flask-oauthlib
+    # via -r requirements.in
+requests-oauthlib==0.8.0
+    # via flask-oauthlib
 requests==2.21.0
-urllib3==1.24.2           # via requests
-werkzeug==0.15.5          # via flask
+    # via
+    #   -r requirements.in
+    #   requests-oauthlib
+urllib3==1.24.2
+    # via requests
+werkzeug==0.15.5
+    # via flask
