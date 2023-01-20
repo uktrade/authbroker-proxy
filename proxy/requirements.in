@@ -7,3 +7,6 @@ raven
 blinker
 
 gunicorn
+
+# Dependabot Fix
+certifi==2022.12.7
