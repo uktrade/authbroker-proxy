@@ -30,8 +30,10 @@ itsdangerous==0.24
     # via flask
 jinja2==2.11.3
     # via flask
-markupsafe==1.1.1
-    # via jinja2
+markupsafe==2.1.2
+    # via
+    #   jinja2
+    #   werkzeug
 oauthlib==2.0.6
     # via
     #   flask-oauthlib
@@ -48,5 +50,5 @@ requests-oauthlib==0.8.0
     # via flask-oauthlib
 urllib3==1.26.6
     # via requests
-werkzeug==0.15.5
+werkzeug==2.2.3
     # via flask
