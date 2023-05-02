@@ -4,8 +4,10 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-blinker==1.4
-    # via -r requirements.in
+blinker==1.6.2
+    # via
+    #   -r requirements.in
+    #   flask
 certifi==2022.12.7
     # via
     #   -r requirements.in
@@ -16,7 +18,7 @@ click==8.1.3
     # via
     #   flask
     #   python-dotenv
-flask==2.2.3
+flask==2.3.2
     # via
     #   -r requirements.in
     #   flask-oauthlib
@@ -50,5 +52,5 @@ requests-oauthlib==0.8.0
     # via flask-oauthlib
 urllib3==1.26.6
     # via requests
-werkzeug==2.2.3
+werkzeug==2.3.3
     # via flask
