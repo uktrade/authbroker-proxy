@@ -26,7 +26,7 @@ flask-oauthlib==0.9.4
     # via -r requirements.in
 gunicorn==22.0.0
     # via -r requirements.in
-idna==2.6
+idna==3.7
     # via requests
 itsdangerous==2.1.2
     # via flask
