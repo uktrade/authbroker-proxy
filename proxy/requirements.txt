@@ -54,5 +54,5 @@ requests-oauthlib==0.8.0
     # via flask-oauthlib
 urllib3==1.26.6
     # via requests
-werkzeug==2.3.3
+werkzeug==3.0.3
     # via flask
