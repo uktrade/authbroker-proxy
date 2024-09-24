@@ -24,7 +24,7 @@ flask==2.3.2
     #   flask-oauthlib
 flask-oauthlib==0.9.4
     # via -r requirements.in
-gunicorn==19.7.1
+gunicorn==22.0.0
     # via -r requirements.in
 idna==2.6
     # via requests
@@ -40,6 +40,8 @@ oauthlib==2.0.6
     # via
     #   flask-oauthlib
     #   requests-oauthlib
+packaging==24.1
+    # via gunicorn
 python-dotenv==0.7.1
     # via -r requirements.in
 raven==6.5.0
